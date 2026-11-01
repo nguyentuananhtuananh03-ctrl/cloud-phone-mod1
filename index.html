@@ -213,13 +213,6 @@
       box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
     }
 
-    .get-key-btn.locked {
-      background: #ef4444;
-      color: white;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
     .coins-card {
       background: #ffffff;
       border: 2px solid #fef08a;
@@ -315,7 +308,6 @@
 
   <div class="container">
     <div class="brand-header">
-      <!-- Đã xóa bỏ phần avatar-wrapper chứa ảnh đại diện -->
       <h1 class="brand-title">Cloud phonemod <span>⚡</span></h1>
       
       <div class="script-select-wrapper">
@@ -387,26 +379,10 @@
   </div>
 
   <script>
-    const accountData = "Tk: t2hf75xj0gd@fldubai.com\nMk: Password123!";
+    const accountData = "Tk: ndmw1bumoy@fldubai.com\nMk: Password123!";
     let completedTasks = new Set();
 
-    window.onload = function() {
-      if (localStorage.getItem("account_viewed") === "true") {
-        lockAccess();
-      }
-    };
-
-    function lockAccess() {
-      const getKeyBtn = document.getElementById("getKeyBtn");
-      getKeyBtn.classList.remove("active");
-      getKeyBtn.classList.add("locked");
-      getKeyBtn.setAttribute("disabled", "true");
-      getKeyBtn.innerHTML = "🚫 Bạn đã xem nội dung này rồi!";
-      document.getElementById("taskSubtitle").innerText = "Mỗi thiết bị chỉ được xem thông tin 1 lần.";
-    }
-
     function startTask(taskId) {
-      if (localStorage.getItem("account_viewed") === "true") return;
       if (completedTasks.has(taskId)) return;
 
       const btnText = document.getElementById(`btn-text-${taskId}`);
@@ -441,15 +417,8 @@
     }
 
     function showKeyModal() {
-      if (localStorage.getItem("account_viewed") === "true") {
-        alert("Bạn đã xem nội dung này rồi!");
-        return;
-      }
-
       document.getElementById("scriptCodeDisplay").innerText = accountData;
       document.getElementById("keyModal").style.display = "flex";
-      
-      localStorage.setItem("account_viewed", "true");
     }
 
     function copyScriptCode() {
@@ -457,8 +426,8 @@
       navigator.clipboard.writeText(code);
       alert("Đã sao chép thông tin tài khoản thành công!");
       document.getElementById("keyModal").style.display = "none";
-      lockAccess();
     }
   </script>
 </body>
-</html>
+  </html>
+  
