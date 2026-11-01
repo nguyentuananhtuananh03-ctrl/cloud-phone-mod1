@@ -331,6 +331,16 @@
       cursor: pointer;
       width: 100%;
     }
+
+    .reset-admin-btn {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 11px;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -388,6 +398,9 @@
       <button id="getKeyBtn" class="get-key-btn" onclick="showKeyModal()" disabled>
         🔒 Hoàn thành để nhận thông tin
       </button>
+
+      <!-- Nút phụ dành cho bạn để reset lại trạng thái trên Database -->
+      <button class="reset-admin-btn" onclick="resetSlot()">🔄 Reset lại slot cho người tiếp theo</button>
     </div>
 
     <div class="coins-card">
@@ -411,7 +424,7 @@
   </div>
 
   <script>
-    // ===== CẤU HÌNH FIREBASE CỦA BẠN (Thay thông tin dự án của bạn vào đây) =====
+    // ===== CẤU HÌNH FIREBASE CỦA BẠN =====
     const firebaseConfig = {
       apiKey: "YOUR_API_KEY",
       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -424,7 +437,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const accountData = "Tk: k9q2u87l8xn@fldubai.com\nMk: Password123!";
+    const accountData = "Tk: 22fvl00sd0d@fldubai.com\nMk: Password123!";
     let completedTasks = new Set();
 
     // Kiểm tra ngay khi vừa vào trang xem đã có ai lấy mất slot chưa trên Database chung
@@ -446,6 +459,18 @@
       getKeyBtn.setAttribute("disabled", "true");
       getKeyBtn.innerHTML = "🚫 Đã có người lấy tài khoản này rồi!";
       document.getElementById("taskSubtitle").innerText = "Tài khoản này chỉ giới hạn duy nhất 1 người xem trên toàn hệ thống.";
+    }
+
+    // Hàm reset lại database thủ công khi bạn muốn mở lại cho người khác
+    async function resetSlot() {
+      const password = prompt("Nhập mật khẩu quản trị để reset (hoặc bấm OK nếu không đặt):");
+      try {
+        await db.collection("settings").doc("account_slot").set({ isClaimed: false });
+        alert("Đã reset thành công! Trang web đã mở khóa cho người tiếp theo.");
+        location.reload();
+      } catch (e) {
+        alert("Lỗi khi reset: " + e.message);
+      }
     }
 
     function startTask(taskId) {
@@ -487,7 +512,6 @@
       if (getKeyBtn.classList.contains("locked")) return;
 
       try {
-        // Kiểm tra lại lần nữa trên Cloud trước khi mở khóa tránh trường hợp 2 người bấm cùng một giây
         const slotRef = db.collection("settings").doc("account_slot");
         const doc = await slotRef.get();
 
