@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cloud phonemod - Get Account</title>
-  <!-- Nhập thư viện Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  
   <style>
     :root {
       --bg-color: #fcfbf7;
@@ -399,8 +395,8 @@
         🔒 Hoàn thành để nhận thông tin
       </button>
 
-      <!-- Nút phụ dành cho bạn để reset lại trạng thái trên Database -->
-      <button class="reset-admin-btn" onclick="resetSlot()">🔄 Reset lại slot cho người tiếp theo</button>
+      <!-- Nút reset nhanh cho trình duyệt của bạn -->
+      <button class="reset-admin-btn" onclick="resetSlot()">🔄 Reset lại trạng thái máy này</button>
     </div>
 
     <div class="coins-card">
@@ -424,31 +420,12 @@
   </div>
 
   <script>
-    // ===== CẤU HÌNH FIREBASE CỦA BẠN =====
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
     const accountData = "Tk: 22fvl00sd0d@fldubai.com\nMk: Password123!";
     let completedTasks = new Set();
 
-    // Kiểm tra ngay khi vừa vào trang xem đã có ai lấy mất slot chưa trên Database chung
-    window.onload = async function() {
-      try {
-        const doc = await db.collection("settings").doc("account_slot").get();
-        if (doc.exists && doc.data().isClaimed === true) {
-          lockAccess();
-        }
-      } catch (e) {
-        console.log("Lỗi kết nối database: ", e);
+    window.onload = function() {
+      if (localStorage.getItem("account_viewed") === "true") {
+        lockAccess();
       }
     };
 
@@ -457,27 +434,22 @@
       getKeyBtn.classList.remove("active");
       getKeyBtn.classList.add("locked");
       getKeyBtn.setAttribute("disabled", "true");
-      getKeyBtn.innerHTML = "🚫 Đã có người lấy tài khoản này rồi!";
-      document.getElementById("taskSubtitle").innerText = "Tài khoản này chỉ giới hạn duy nhất 1 người xem trên toàn hệ thống.";
+      getKeyBtn.innerHTML = "🚫 Bạn đã xem nội dung này rồi!";
+      document.getElementById("taskSubtitle").innerText = "Mỗi thiết bị chỉ được xem thông tin 1 lần.";
     }
 
-    // Hàm reset lại database thủ công khi bạn muốn mở lại cho người khác
-    async function resetSlot() {
-      const password = prompt("Nhập mật khẩu quản trị để reset (hoặc bấm OK nếu không đặt):");
-      try {
-        await db.collection("settings").doc("account_slot").set({ isClaimed: false });
-        alert("Đã reset thành công! Trang web đã mở khóa cho người tiếp theo.");
-        location.reload();
-      } catch (e) {
-        alert("Lỗi khi reset: " + e.message);
-      }
+    function resetSlot() {
+      localStorage.removeItem("account_viewed");
+      alert("Đã reset trạng thái cho thiết bị này!");
+      location.reload();
     }
 
     function startTask(taskId) {
+      if (localStorage.getItem("account_viewed") === "true") return;
       if (completedTasks.has(taskId)) return;
 
       const btnText = document.getElementById(`btn-text-${taskId}`);
-      let timeLeft = 10; // Đếm ngược 10 giây
+      let timeLeft = 10;
       
       btnText.innerText = `${timeLeft}s`;
 
@@ -507,29 +479,16 @@
       }
     }
 
-    async function showKeyModal() {
-      const getKeyBtn = document.getElementById("getKeyBtn");
-      if (getKeyBtn.classList.contains("locked")) return;
-
-      try {
-        const slotRef = db.collection("settings").doc("account_slot");
-        const doc = await slotRef.get();
-
-        if (doc.exists && doc.data().isClaimed === true) {
-          lockAccess();
-          alert("Tiếc quá! Đã có người vừa nhận trước bạn một bước.");
-          return;
-        }
-
-        // Đánh dấu đã có người lấy trên Database chung
-        await slotRef.set({ isClaimed: true });
-
-        // Hiển thị nội dung
-        document.getElementById("scriptCodeDisplay").innerText = accountData;
-        document.getElementById("keyModal").style.display = "flex";
-      } catch (e) {
-        alert("Có lỗi xảy ra, vui lòng thử lại!");
+    function showKeyModal() {
+      if (localStorage.getItem("account_viewed") === "true") {
+        alert("Bạn đã xem nội dung này rồi!");
+        return;
       }
+
+      document.getElementById("scriptCodeDisplay").innerText = accountData;
+      document.getElementById("keyModal").style.display = "flex";
+      
+      localStorage.setItem("account_viewed", "true");
     }
 
     function copyScriptCode() {
