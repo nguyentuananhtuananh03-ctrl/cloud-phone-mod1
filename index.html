@@ -327,16 +327,6 @@
       cursor: pointer;
       width: 100%;
     }
-
-    .reset-admin-btn {
-      background: none;
-      border: none;
-      color: #9ca3af;
-      font-size: 11px;
-      cursor: pointer;
-      margin-top: 10px;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
@@ -394,9 +384,6 @@
       <button id="getKeyBtn" class="get-key-btn" onclick="showKeyModal()" disabled>
         🔒 Hoàn thành để nhận thông tin
       </button>
-
-      <!-- Nút reset nhanh cho trình duyệt của bạn -->
-      <button class="reset-admin-btn" onclick="resetSlot()">🔄 Reset lại trạng thái máy này</button>
     </div>
 
     <div class="coins-card">
@@ -436,12 +423,6 @@
       getKeyBtn.setAttribute("disabled", "true");
       getKeyBtn.innerHTML = "🚫 Bạn đã xem nội dung này rồi!";
       document.getElementById("taskSubtitle").innerText = "Mỗi thiết bị chỉ được xem thông tin 1 lần.";
-    }
-
-    function resetSlot() {
-      localStorage.removeItem("account_viewed");
-      alert("Đã reset trạng thái cho thiết bị này!");
-      location.reload();
     }
 
     function startTask(taskId) {
