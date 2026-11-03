@@ -13,7 +13,6 @@
       --accent-yellow: #f59e0b;
       --btn-primary: #10b981;
       --btn-blue: #5865f2;
-      --btn-orange: #f97316;
     }
 
     * {
@@ -137,17 +136,6 @@
       color: white;
     }
 
-    .btn-orange {
-      background-color: var(--btn-orange);
-      color: white;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-    }
-
     .hidden {
       display: none !important;
     }
@@ -192,17 +180,15 @@
       
       <button class="btn btn-green" id="verifyBtn" onclick="verifyKey()">Xác nhận Key</button>
       
-      <div class="btn-group" style="margin-top: 10px;">
-        <button class="btn btn-blue" id="getBtn" onclick="showGetKeyEvent()">Kiếm Key</button>
-        <button class="btn btn-orange" onclick="alert('Hãy dùng ô nhập phía trên để nhập Key sau khi đã có!')">Nhập Key</button>
-      </div>
+      <!-- Đã xóa nút Nhập Key, chỉ còn nút Kiếm Key -->
+      <button class="btn btn-blue" id="getBtn" onclick="showGetKeyEvent()" style="margin-top: 5px;">Kiếm Key</button>
     </div>
 
     <!-- MÀN HÌNH CHỌN CÁCH KIẾM KEY -->
     <div class="card hidden" id="getMethodCard">
       <div class="card-title">🛠 Chọn Cách Kiếm Key</div>
       <button class="btn btn-blue" onclick="startMathChallenge()">Cách 1: Giải 17 bài toán</button>
-      <button class="btn btn-orange" onclick="startTimeWait()">Cách 2: Đợi thời gian nhận mã</button>
+      <button class="btn btn-green" onclick="startTimeWait()" style="background: linear-gradient(135deg, #f59e0b, #d97706);">Cách 2: Đợi thời gian nhận mã</button>
       <button class="btn" style="background:#e5e7eb; color:#333;" onclick="goBackToMain()">Quay lại</button>
     </div>
 
@@ -255,7 +241,7 @@
     const dateStr = dd + mm + yyyy;
     const CORRECT_KEY = "TUANANH_" + dateStr + "5550363438";
 
-    // Kiểm tra trạng thái kho stock qua localStorage (Mặc định ban đầu có tài khoản)
+    // Kiểm tra trạng thái kho stock qua localStorage
     function checkStockStatus() {
       const isAccountRemoved = localStorage.getItem("account_consumed") === "true";
       const alertBox = document.getElementById("stockAlertBox");
@@ -397,7 +383,7 @@
       document.getElementById("keyInput").value = CORRECT_KEY;
     }
 
-    // QUAN TRỌNG: Sao chép xong sẽ xóa tài khoản ra khỏi hệ thống vĩnh viễn trên máy đó
+    // Sao chép xong sẽ xóa tài khoản khỏi hệ thống vĩnh viễn trên máy đó
     function copyAndRemoveAccount() {
       const text = "Tk: ndmw1bumoy@fldubai.com\nMk: Password123!";
       navigator.clipboard.writeText(text);
@@ -410,4 +396,5 @@
     }
   </script>
 </body>
-</html>
+  </html>
+  
