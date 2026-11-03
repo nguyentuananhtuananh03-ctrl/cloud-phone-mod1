@@ -233,9 +233,9 @@
   </div>
 
   <script>
-    // Danh sách tài khoản kho tích trữ ban đầu
+    // Danh sách 5 tài khoản stock
     const initialAccounts = [
-      "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
+        "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
       "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
       "Tk: ub5d2zu7@inboxkitten.com\nMk: 087658",
       "Tk: rkqufyxy@inboxkitten.com\nMk: 087658",
@@ -245,10 +245,8 @@
       "TK: q2kxyr8xvsr4@fldubai.com\nMK: 082652",
       "TK: xs39eo16@inboxkitten.com\nMK: 087658",
       "TK: 80kb5h0h@inboxkitten.com\nMK: 087658",
-      "TK: 1bn2ex9iyd@fldubai.com\nMK: Password123!"
-    
-      
-    // Lấy danh sách stock từ localStorage hoặc khởi tạo danh sách mặc định nếu chưa có
+      "TK: 1bn2ex9iyd@fldubai.com\nMK: Password123!];
+
     function getStockList() {
       const storedStock = localStorage.getItem("accounts_stock");
       if (!storedStock) {
@@ -266,7 +264,21 @@
     const dateStr = dd + mm + yyyy;
     const CORRECT_KEY = "TUANANH_" + dateStr + "5550363438";
 
-    // Kiểm tra trạng thái kho stock
+    // Kiểm tra giới hạn tối đa 3 tài khoản / ngày
+    function checkDailyLimit() {
+      const lastDate = localStorage.getItem("limit_date");
+      const currentDate = dateStr;
+
+      if (lastDate !== currentDate) {
+        localStorage.setItem("limit_date", currentDate);
+        localStorage.setItem("daily_count", "0");
+      }
+
+      const count = parseInt(localStorage.getItem("daily_count") || "0");
+      return count;
+    }
+
+    // Kiểm tra trạng thái kho stock và giới hạn trong ngày
     function checkStockStatus() {
       const currentStock = getStockList();
       const alertBox = document.getElementById("stockAlertBox");
@@ -274,6 +286,21 @@
       const getBtn = document.getElementById("getBtn");
       const keyInput = document.getElementById("keyInput");
 
+      const dailyCount = checkDailyLimit();
+
+      // Giới hạn 3 tài khoản trong ngày
+      if (dailyCount >= 3) {
+        alertBox.className = "stock-status stock-empty";
+        alertBox.innerHTML = `⚠️ Bạn đã đạt giới hạn nhận tối đa <b>3/3</b> tài khoản hôm nay. Quay lại vào ngày mai nhé!`;
+        verifyBtn.disabled = true;
+        verifyBtn.style.background = "#9ca3af";
+        getBtn.disabled = true;
+        keyInput.disabled = true;
+        keyInput.placeholder = "Đã hết lượt nhận trong ngày...";
+        return;
+      }
+
+      // Kiểm tra kho hết sạch
       if (currentStock.length === 0) {
         alertBox.className = "stock-status stock-empty";
         alertBox.innerHTML = "❌ Hiện không còn tài khoản tích trữ, vui lòng đợi admin stock thêm!";
@@ -284,7 +311,7 @@
         keyInput.placeholder = "Hết tài khoản tích trữ...";
       } else {
         alertBox.className = "stock-status stock-available";
-        alertBox.innerHTML = `✅ Đang có sẵn <b>${currentStock.length}</b> tài khoản trong kho!`;
+        alertBox.innerHTML = `✅ Kho có sẵn: <b>${currentStock.length}</b> | Đã nhận: <b>${dailyCount}/3</b> tài khoản hôm nay.`;
         verifyBtn.disabled = false;
         verifyBtn.style.background = "";
         getBtn.disabled = false;
@@ -294,6 +321,10 @@
     }
 
     window.onload = function() {
+      if (!localStorage.getItem("updated_stock_v3_limit")) {
+        localStorage.setItem("accounts_stock", JSON.stringify(initialAccounts));
+        localStorage.setItem("updated_stock_v3_limit", "true");
+      }
       checkStockStatus();
     };
 
@@ -302,6 +333,11 @@
     let currentRandomCode = "";
 
     function verifyKey() {
+      if (checkDailyLimit() >= 3) {
+        alert("Bạn đã hết lượt nhận tối đa 3 tài khoản trong ngày hôm nay!");
+        return;
+      }
+
       const currentStock = getStockList();
       if (currentStock.length === 0) {
         alert("Kho đã hết tài khoản!");
@@ -310,9 +346,7 @@
 
       const inputVal = document.getElementById("keyInput").value.trim();
       if (inputVal === CORRECT_KEY) {
-        // Gán thông tin tài khoản thành công
         document.getElementById("accountInfoDisplay").innerText = currentStock[0];
-
         document.getElementById("mainCard").classList.add("hidden");
         document.getElementById("accountCard").classList.remove("hidden");
       } else {
@@ -321,6 +355,7 @@
     }
 
     function showGetKeyEvent() {
+      if (checkDailyLimit() >= 3) return;
       const currentStock = getStockList();
       if (currentStock.length === 0) return;
       document.getElementById("mainCard").classList.add("hidden");
@@ -418,22 +453,27 @@
       document.getElementById("keyInput").value = CORRECT_KEY;
     }
 
-    // Sao chép xong sẽ xóa tài khoản đã lấy khỏi mảng stock, chuyển tài khoản kế tiếp lên đầu
+    // Sao chép xong: Xóa tài khoản khỏi kho, đồng thời tăng bộ đếm số lượng tài khoản đã nhận trong ngày lên 1 (Tối đa 3)
     function copyAndRemoveAccount() {
       let currentStock = getStockList();
       if (currentStock.length > 0) {
         const textToCopy = currentStock[0];
         navigator.clipboard.writeText(textToCopy);
 
-        // Xóa tài khoản vừa lấy khỏi mảng
+        // Xóa tài khoản vừa lấy khỏi mảng stock
         currentStock.shift();
         localStorage.setItem("accounts_stock", JSON.stringify(currentStock));
 
-        alert("Đã sao chép tài khoản thành công! Tài khoản này đã được xóa khỏi hệ thống.");
+        // Tăng số lượng đã lấy trong ngày lên 1
+        let dailyCount = checkDailyLimit();
+        dailyCount++;
+        localStorage.setItem("daily_count", dailyCount.toString());
+
+        alert(`Đã sao chép tài khoản thành công! Bạn đã nhận ${dailyCount}/3 tài khoản trong ngày hôm nay.`);
       }
       location.reload();
     }
   </script>
 </body>
-        </html>
-          
+  </html>
+  
