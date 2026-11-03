@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud phonemod - Stock System</title>
+  <title>Cloud phone mod - Stock System</title>
   <style>
     :root {
       --bg-color: #fcfbf7;
@@ -233,7 +233,7 @@
   </div>
 
   <script>
-    // Tổng hợp toàn bộ danh sách tài khoản (cũ + mới)
+    // Tổng hợp toàn bộ danh sách tài khoản (đã thêm 5 tài khoản mới nhất)
     const initialAccounts = [
       "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
       "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
@@ -260,7 +260,12 @@
       "Tk: q2kxyr8xvsr4@fldubai.com\nMk: 082652",
       "Tk: xs39eo16@inboxkitten.com\nMk: 087658",
       "Tk: 80kb5h0h@inboxkitten.com\nMk: 087658",
-      "Tk: 1bn2ex9iyd@fldubai.com\nMk: Password123!"
+      "Tk: 1bn2ex9iyd@fldubai.com\nMk: Password123!",
+      "Tk: 0xasy64op6@fldubai.com\nMk: Password123!",
+      "Tk: 8wyi794w8r@fldubai.com\nMk: Password123!",
+      "Tk: 4etny69818@fldubai.com\nMk: Password123!",
+      "Tk: shkq3dcp0t@fldubai.com\nMk: Password123!",
+      "Tk: nk8psrm1od@fldubai.com\nMk: Password123!"
     ];
 
     function getStockList() {
@@ -338,9 +343,9 @@
 
     window.onload = function() {
       // Cập nhật lại kho nếu là phiên bản mới
-      if (!localStorage.getItem("updated_stock_v_full_v2")) {
+      if (!localStorage.getItem("updated_stock_v_full_v3")) {
         localStorage.setItem("accounts_stock", JSON.stringify(initialAccounts));
-        localStorage.setItem("updated_stock_v_full_v2", "true");
+        localStorage.setItem("updated_stock_v_full_v3", "true");
       }
       checkStockStatus();
     };
@@ -492,5 +497,5 @@
     }
   </script>
 </body>
-        </html>
-      
+  </html>
+        
