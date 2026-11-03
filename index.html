@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud phone mod - Stock System</title>
+  <title>Cloud phonemod - Stock System</title>
   <style>
     :root {
       --bg-color: #fcfbf7;
@@ -304,8 +304,7 @@
 
       const inputVal = document.getElementById("keyInput").value.trim();
       if (inputVal === CORRECT_KEY) {
-        // Lấy tài khoản đầu tiên ra hiển thị
-        document.getElementById("accountInfoDisplayinnerText") = "";
+        // Gán thông tin tài khoản thành công
         document.getElementById("accountInfoDisplay").innerText = currentStock[0];
 
         document.getElementById("mainCard").classList.add("hidden");
@@ -430,5 +429,5 @@
     }
   </script>
 </body>
-          </html>
-        
+        </html>
+          
