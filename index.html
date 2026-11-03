@@ -150,6 +150,7 @@
       width: 100%;
       text-align: center;
       margin: 10px 0;
+      white-space: pre-line;
     }
 
     .math-question {
@@ -180,7 +181,6 @@
       
       <button class="btn btn-green" id="verifyBtn" onclick="verifyKey()">Xác nhận Key</button>
       
-      <!-- Đã xóa nút Nhập Key, chỉ còn nút Kiếm Key -->
       <button class="btn btn-blue" id="getBtn" onclick="showGetKeyEvent()" style="margin-top: 5px;">Kiếm Key</button>
     </div>
 
@@ -226,13 +226,32 @@
     <div class="card hidden" id="accountCard">
       <div class="card-title">🎉 Thông Tin Tài Khoản</div>
       <p style="font-size: 13.5px; color: #666; text-align: center;">Xác thực thành công! Hãy sao chép tài khoản của bạn:</p>
-      <div class="key-box" id="accountInfoDisplay">Tk: ndmw1bumoy@fldubai.com<br>Mk: Password123!</div>
-      <button class="btn btn-green" onclick="copyAndRemoveAccount()">Sao chép & Xóa tài khoản khỏi hệ thống</button>
+      <div class="key-box" id="accountInfoDisplay">Đang tải tài khoản...</div>
+      <button class="btn btn-green" onclick="copyAndRemoveAccount()">Sao chép & Nhận tài khoản tiếp theo</button>
     </div>
 
   </div>
 
   <script>
+    // Danh sách tài khoản kho tích trữ ban đầu
+    const initialAccounts = [
+      "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
+      "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
+      "Tk: ub5d2zu7@inboxkitten.com\nMk: 087658",
+      "Tk: rkqufyxy@inboxkitten.com\nMk: 087658",
+      "Tk: m16y0tmf@inboxkitten.com\nMk: 087658"
+    ];
+
+    // Lấy danh sách stock từ localStorage hoặc khởi tạo danh sách mặc định nếu chưa có
+    function getStockList() {
+      const storedStock = localStorage.getItem("accounts_stock");
+      if (!storedStock) {
+        localStorage.setItem("accounts_stock", JSON.stringify(initialAccounts));
+        return [...initialAccounts];
+      }
+      return JSON.parse(storedStock);
+    }
+
     // Định dạng Key tự động theo ngày tháng năm hiện tại
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -241,15 +260,15 @@
     const dateStr = dd + mm + yyyy;
     const CORRECT_KEY = "TUANANH_" + dateStr + "5550363438";
 
-    // Kiểm tra trạng thái kho stock qua localStorage
+    // Kiểm tra trạng thái kho stock
     function checkStockStatus() {
-      const isAccountRemoved = localStorage.getItem("account_consumed") === "true";
+      const currentStock = getStockList();
       const alertBox = document.getElementById("stockAlertBox");
       const verifyBtn = document.getElementById("verifyBtn");
       const getBtn = document.getElementById("getBtn");
       const keyInput = document.getElementById("keyInput");
 
-      if (isAccountRemoved) {
+      if (currentStock.length === 0) {
         alertBox.className = "stock-status stock-empty";
         alertBox.innerHTML = "❌ Hiện không còn tài khoản tích trữ, vui lòng đợi admin stock thêm!";
         verifyBtn.disabled = true;
@@ -259,7 +278,12 @@
         keyInput.placeholder = "Hết tài khoản tích trữ...";
       } else {
         alertBox.className = "stock-status stock-available";
-        alertBox.innerHTML = "✅ Đang có tài khoản tích trữ sẵn sàng!";
+        alertBox.innerHTML = `✅ Đang có sẵn <b>${currentStock.length}</b> tài khoản trong kho!`;
+        verifyBtn.disabled = false;
+        verifyBtn.style.background = "";
+        getBtn.disabled = false;
+        keyInput.disabled = false;
+        keyInput.placeholder = "Nhập key của bạn vào đây...";
       }
     }
 
@@ -272,13 +296,18 @@
     let currentRandomCode = "";
 
     function verifyKey() {
-      if (localStorage.getItem("account_consumed") === "true") {
+      const currentStock = getStockList();
+      if (currentStock.length === 0) {
         alert("Kho đã hết tài khoản!");
         return;
       }
 
       const inputVal = document.getElementById("keyInput").value.trim();
       if (inputVal === CORRECT_KEY) {
+        // Lấy tài khoản đầu tiên ra hiển thị
+        document.getElementById("accountInfoDisplayinnerText") = "";
+        document.getElementById("accountInfoDisplay").innerText = currentStock[0];
+
         document.getElementById("mainCard").classList.add("hidden");
         document.getElementById("accountCard").classList.remove("hidden");
       } else {
@@ -287,7 +316,8 @@
     }
 
     function showGetKeyEvent() {
-      if (localStorage.getItem("account_consumed") === "true") return;
+      const currentStock = getStockList();
+      if (currentStock.length === 0) return;
       document.getElementById("mainCard").classList.add("hidden");
       document.getElementById("getMethodCard").classList.remove("hidden");
     }
@@ -383,18 +413,22 @@
       document.getElementById("keyInput").value = CORRECT_KEY;
     }
 
-    // Sao chép xong sẽ xóa tài khoản khỏi hệ thống vĩnh viễn trên máy đó
+    // Sao chép xong sẽ xóa tài khoản đã lấy khỏi mảng stock, chuyển tài khoản kế tiếp lên đầu
     function copyAndRemoveAccount() {
-      const text = "Tk: ndmw1bumoy@fldubai.com\nMk: Password123!";
-      navigator.clipboard.writeText(text);
-      
-      // Đánh dấu đã lấy tài khoản -> Xóa khỏi hệ thống
-      localStorage.setItem("account_consumed", "true");
-      
-      alert("Đã sao chép tài khoản thành công! Tài khoản này đã được tự động xóa khỏi hệ thống.");
+      let currentStock = getStockList();
+      if (currentStock.length > 0) {
+        const textToCopy = currentStock[0];
+        navigator.clipboard.writeText(textToCopy);
+
+        // Xóa tài khoản vừa lấy khỏi mảng
+        currentStock.shift();
+        localStorage.setItem("accounts_stock", JSON.stringify(currentStock));
+
+        alert("Đã sao chép tài khoản thành công! Tài khoản này đã được xóa khỏi hệ thống.");
+      }
       location.reload();
     }
   </script>
 </body>
-  </html>
-  
+          </html>
+        
