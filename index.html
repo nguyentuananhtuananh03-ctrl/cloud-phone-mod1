@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud phone mod - Stock System</title>
+  <title>Cloud phonemod - Stock System</title>
   <style>
     :root {
       --bg-color: #fcfbf7;
@@ -233,39 +233,38 @@
   </div>
 
   <script>
-    // Tổng hợp toàn bộ danh sách tài khoản (đã thêm 5 tài khoản mới nhất)
+    // Danh sách toàn bộ tài khoản lấy từ hình ảnh
     const initialAccounts = [
-      "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
-      "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
-      "Tk: ub5d2zu7@inboxkitten.com\nMk: 087658",
-      "Tk: rkqufyxy@inboxkitten.com\nMk: 087658",
-      "Tk: m16y0tmf@inboxkitten.com\nMk: 087658",
-      "Tk: 8qytdm0e01@fldubai.com\nMk: Password123!",
-      "Tk: iddxbk7ji8@fldubai.com\nMk: Password123!",
-      "Tk: bybfg0pwcn@fldubai.com\nMk: Password123!",
-      "Tk: 9cvlkpk708@fldubai.com\nMk: Password123!",
-      "Tk: 6t4gj7f2mk@fldubai.com\nMk: Password123!",
-      "Tk: 65czwpq732@fldubai.com\nMk: Password123!",
-      "Tk: nasela839n@fldubai.com\nMk: Password123!",
-      "Tk: l05l0hq5xv@fldubai.com\nMk: Password123!",
-      "Tk: 1k38b8pv4n@fldubai.com\nMk: Password123!",
-      "Tk: vjb2as9b7x@fldubai.com\nMk: Password123!",
-      "Tk: 22tgvck2xw@fldubai.com\nMk: Password123!",
-      "Tk: 315q9hbfdl@fldubai.com\nMk: Password123!",
-      "Tk: yeu21yysiv@fldubai.com\nMk: Password123!",
-      "Tk: rgpkdfkrto@fldubai.com\nMk: Password123!",
-      "Tk: p3wqtuubgj@fldubai.com\nMk: Password123!",
-      "Tk: ddtzcu7hknik@fldubai.com\nMk: 082652",
-      "Tk: no6ps5fxdbzm@fldubai.com\nMk: 082652",
-      "Tk: q2kxyr8xvsr4@fldubai.com\nMk: 082652",
-      "Tk: xs39eo16@inboxkitten.com\nMk: 087658",
-      "Tk: 80kb5h0h@inboxkitten.com\nMk: 087658",
-      "Tk: 1bn2ex9iyd@fldubai.com\nMk: Password123!",
-      "Tk: 0xasy64op6@fldubai.com\nMk: Password123!",
-      "Tk: 8wyi794w8r@fldubai.com\nMk: Password123!",
-      "Tk: 4etny69818@fldubai.com\nMk: Password123!",
-      "Tk: shkq3dcp0t@fldubai.com\nMk: Password123!",
-      "Tk: nk8psrm1od@fldubai.com\nMk: Password123!"
+      "Tk: 5oqmfvrtv0@fldubai.com\nMk: Password123!",
+      "Tk: kdxnemcaaw@fldubai.com\nMk: Password123!",
+      "Tk: bnne25cmc2@fldubai.com\nMk: Password123!",
+      "Tk: 3wmjaz85zk@fldubai.com\nMk: Password123!",
+      "Tk: 76iga8aef5@fldubai.com\nMk: Password123!",
+      "Tk: pbndnsa0pu@fldubai.com\nMk: Password123!",
+      "Tk: xrxsrw8u5e@fldubai.com\nMk: Password123!",
+      "Tk: x80113ooq4@fldubai.com\nMk: Password123!",
+      "Tk: u72g6s6v91@fldubai.com\nMk: Password123!",
+      "Tk: 8xptgwnjnr@fldubai.com\nMk: Password123!",
+      "Tk: zlcv4s5unf@fldubai.com\nMk: Password123!",
+      "Tk: d21ivrinjo@fldubai.com\nMk: Password123!",
+      "Tk: 5cf11e6usc@fldubai.com\nMk: Password123!",
+      "Tk: dde8fdijk8@fldubai.com\nMk: Password123!",
+      "Tk: yc3uif8jd7@fldubai.com\nMk: Password123!",
+      "Tk: mus8x7h2vz@fldubai.com\nMk: Password123!",
+      "Tk: gah4h63vsy@fldubai.com\nMk: Password123!",
+      "Tk: ijlbdoe6p8@fldubai.com\nMk: Password123!",
+      "Tk: ru80jt1nnl@fldubai.com\nMk: Password123!",
+      "Tk: g09vla54du@fldubai.com\nMk: Password123!",
+      "Tk: kl6aco95tf@fldubai.com\nMk: Password123!",
+      "Tk: 9jejyb98zc@fldubai.com\nMk: Password123!",
+      "Tk: 3l2894sw57@fldubai.com\nMk: Password123!",
+      "Tk: a37ln5rgew@fldubai.com\nMk: Password123!",
+      "Tk: l9n4thpg7x@fldubai.com\nMk: Password123!",
+      "Tk: shiairqjdl@fldubai.com\nMk: Password123!",
+      "Tk: 7j1s79hdxb@fldubai.com\nMk: Password123!",
+      "Tk: t4r29xdr3d@fldubai.com\nMk: Password123!",
+      "Tk: khiguu0ut6@fldubai.com\nMk: Password123!",
+      "Tk: 85ipxgi0dw@fldubai.com\nMk: Password123!"
     ];
 
     function getStockList() {
@@ -343,9 +342,9 @@
 
     window.onload = function() {
       // Cập nhật lại kho nếu là phiên bản mới
-      if (!localStorage.getItem("updated_stock_v_full_v3")) {
+      if (!localStorage.getItem("updated_stock_from_images_v1")) {
         localStorage.setItem("accounts_stock", JSON.stringify(initialAccounts));
-        localStorage.setItem("updated_stock_v_full_v3", "true");
+        localStorage.setItem("updated_stock_from_images_v1", "true");
       }
       checkStockStatus();
     };
@@ -497,5 +496,5 @@
     }
   </script>
 </body>
-  </html>
-        
+        </html>
+  
