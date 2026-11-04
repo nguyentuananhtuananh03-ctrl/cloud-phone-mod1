@@ -233,38 +233,69 @@
   </div>
 
   <script>
-    // Danh sách toàn bộ tài khoản lấy từ hình ảnh
+    // Tổng hợp toàn bộ danh sách trọn gói 61 tài khoản (31 tài khoản text + 30 tài khoản ảnh)
     const initialAccounts = [
-      "Tk: 5oqmfvrtv0@fldubai.com\nMk: Password123!",
-      "Tk: kdxnemcaaw@fldubai.com\nMk: Password123!",
-      "Tk: bnne25cmc2@fldubai.com\nMk: Password123!",
-      "Tk: 3wmjaz85zk@fldubai.com\nMk: Password123!",
-      "Tk: 76iga8aef5@fldubai.com\nMk: Password123!",
-      "Tk: pbndnsa0pu@fldubai.com\nMk: Password123!",
-      "Tk: xrxsrw8u5e@fldubai.com\nMk: Password123!",
-      "Tk: x80113ooq4@fldubai.com\nMk: Password123!",
-      "Tk: u72g6s6v91@fldubai.com\nMk: Password123!",
-      "Tk: 8xptgwnjnr@fldubai.com\nMk: Password123!",
-      "Tk: zlcv4s5unf@fldubai.com\nMk: Password123!",
-      "Tk: d21ivrinjo@fldubai.com\nMk: Password123!",
-      "Tk: 5cf11e6usc@fldubai.com\nMk: Password123!",
-      "Tk: dde8fdijk8@fldubai.com\nMk: Password123!",
-      "Tk: yc3uif8jd7@fldubai.com\nMk: Password123!",
-      "Tk: mus8x7h2vz@fldubai.com\nMk: Password123!",
-      "Tk: gah4h63vsy@fldubai.com\nMk: Password123!",
-      "Tk: ijlbdoe6p8@fldubai.com\nMk: Password123!",
-      "Tk: ru80jt1nnl@fldubai.com\nMk: Password123!",
-      "Tk: g09vla54du@fldubai.com\nMk: Password123!",
-      "Tk: kl6aco95tf@fldubai.com\nMk: Password123!",
-      "Tk: 9jejyb98zc@fldubai.com\nMk: Password123!",
-      "Tk: 3l2894sw57@fldubai.com\nMk: Password123!",
-      "Tk: a37ln5rgew@fldubai.com\nMk: Password123!",
-      "Tk: l9n4thpg7x@fldubai.com\nMk: Password123!",
-      "Tk: shiairqjdl@fldubai.com\nMk: Password123!",
-      "Tk: 7j1s79hdxb@fldubai.com\nMk: Password123!",
-      "Tk: t4r29xdr3d@fldubai.com\nMk: Password123!",
-      "Tk: khiguu0ut6@fldubai.com\nMk: Password123!",
-      "Tk: 85ipxgi0dw@fldubai.com\nMk: Password123!"
+      "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
+      "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
+      "Tk: ub5d2zu7@inboxkitten.com\nMk: 087658",
+      "Tk: rkqufyxy@inboxkitten.com\nMk: 087658",
+      "Tk: m16y0tmf@inboxkitten.com\nMk: 087658",
+      "Tk: 8qytdm0e01@fldubai.com\nMk: Password123!",
+      "Tk: iddxbk7ji8@fldubai.com\nMk: Password123!",
+      "Tk: bybfg0pwcn@fldubai.com\nMk: Password123!",
+      "Tk: 9cvlkpk708@fldubai.com\nMk: Password123!",
+      "Tk: 6t4gj7f2mk@fldubai.com\nMk: Password123!",
+      "Tk: 65czwpq732@fldubai.com\nMk: Password123!",
+      "Tk: nasela839n@fldubai.com\nMk: Password123!",
+      "Tk: l05l0hq5xv@fldubai.com\nMk: Password123!",
+      "Tk: 1k38b8pv4n@fldubai.com\nMk: Password123!",
+      "Tk: vjb2as9b7x@fldubai.com\nMk: Password123!",
+      "Tk: 22tgvck2xw@fldubai.com\nMk: Password123!",
+      "Tk: 315q9hbfdl@fldubai.com\nMk: Password123!",
+      "Tk: yeu21yysiv@fldubai.com\nMk: Password123!",
+      "Tk: rgpkdfkrto@fldubai.com\nMk: Password123!",
+      "Tk: p3wqtuubgj@fldubai.com\nMk: Password123!",
+      "Tk: ddtzcu7hknik@fldubai.com\nMk: 082652",
+      "Tk: no6ps5fxdbzm@fldubai.com\nMk: 082652",
+      "Tk: q2kxyr8xvsr4@fldubai.com\nMk: 082652",
+      "Tk: xs39eo16@inboxkitten.com\nMk: 087658",
+      "Tk: 80kb5h0h@inboxkitten.com\nMk: 087658",
+      "Tk: 1bn2ex9iyd@fldubai.com\nMk: Password123!",
+      "Tk: 0xasy64op6@fldubai.com\nMk: Password123!",
+      "Tk: 8wyi794w8r@fldubai.com\nMk: Password123!",
+      "Tk: 4etny69818@fldubai.com\nMk: Password123!",
+      "Tk: shkq3dcp0t@fldubai.com\nMk: Password123!",
+      "Tk: nk8psrm1od@fldubai.com\nMk: Password123!",
+      "Tk: 5oqmfvrtv0@fldubai.com\nMk: Password123[span_14](start_span)[span_15](start_span)[span_16](start_span)[span_17](start_span)[span_18](start_span)[span_19](start_span)[span_20](start_span)!"[span_14](end_span)[span_15](end_span)[span_16](end_span)[span_17](end_span)[span_18](end_span)[span_19](end_span)[span_20](end_span),
+      "Tk: kdxnemcaaw@fldubai.com\nMk: Password123[span_21](start_span)[span_22](start_span)[span_23](start_span)[span_24](start_span)[span_25](start_span)[span_26](start_span)[span_27](start_span)!"[span_21](end_span)[span_22](end_span)[span_23](end_span)[span_24](end_span)[span_25](end_span)[span_26](end_span)[span_27](end_span),
+      "Tk: bnne25cmc2@fldubai.com\nMk: Password123[span_28](start_span)[span_29](start_span)[span_30](start_span)[span_31](start_span)[span_32](start_span)[span_33](start_span)[span_34](start_span)!"[span_28](end_span)[span_29](end_span)[span_30](end_span)[span_31](end_span)[span_32](end_span)[span_33](end_span)[span_34](end_span),
+      "Tk: 3wmjaz85zk@fldubai.com\nMk: Password123[span_35](start_span)[span_36](start_span)[span_37](start_span)[span_38](start_span)[span_39](start_span)[span_40](start_span)[span_41](start_span)!"[span_35](end_span)[span_36](end_span)[span_37](end_span)[span_38](end_span)[span_39](end_span)[span_40](end_span)[span_41](end_span),
+      "Tk: 76iga8aef5@fldubai.com\nMk: Password123[span_42](start_span)[span_43](start_span)[span_44](start_span)[span_45](start_span)[span_46](start_span)[span_47](start_span)[span_48](start_span)!"[span_42](end_span)[span_43](end_span)[span_44](end_span)[span_45](end_span)[span_46](end_span)[span_47](end_span)[span_48](end_span),
+      "Tk: pbndnsa0pu@fldubai.com\nMk: Password123[span_49](start_span)[span_50](start_span)[span_51](start_span)[span_52](start_span)[span_53](start_span)[span_54](start_span)[span_55](start_span)!"[span_49](end_span)[span_50](end_span)[span_51](end_span)[span_52](end_span)[span_53](end_span)[span_54](end_span)[span_55](end_span),
+      "Tk: xrxsrw8u5e@fldubai.com\nMk: Password123[span_56](start_span)[span_57](start_span)[span_58](start_span)[span_59](start_span)[span_60](start_span)[span_61](start_span)[span_62](start_span)!"[span_56](end_span)[span_57](end_span)[span_58](end_span)[span_59](end_span)[span_60](end_span)[span_61](end_span)[span_62](end_span),
+      "Tk: x80113ooq4@fldubai.com\nMk: Password123[span_63](start_span)[span_64](start_span)[span_65](start_span)[span_66](start_span)[span_67](start_span)[span_68](start_span)[span_69](start_span)!"[span_63](end_span)[span_64](end_span)[span_65](end_span)[span_66](end_span)[span_67](end_span)[span_68](end_span)[span_69](end_span),
+      "Tk: u72g6s6v91@fldubai.com\nMk: Password123[span_70](start_span)[span_71](start_span)[span_72](start_span)[span_73](start_span)[span_74](start_span)[span_75](start_span)[span_76](start_span)!"[span_70](end_span)[span_71](end_span)[span_72](end_span)[span_73](end_span)[span_74](end_span)[span_75](end_span)[span_76](end_span),
+      "Tk: 8xptgwnjnr@fldubai.com\nMk: Password123[span_77](start_span)[span_78](start_span)[span_79](start_span)[span_80](start_span)[span_81](start_span)[span_82](start_span)[span_83](start_span)!"[span_77](end_span)[span_78](end_span)[span_79](end_span)[span_80](end_span)[span_81](end_span)[span_82](end_span)[span_83](end_span),
+      "Tk: zlcv4s5unf@fldubai.com\nMk: Password123[span_84](start_span)[span_85](start_span)[span_86](start_span)[span_87](start_span)[span_88](start_span)[span_89](start_span)[span_90](start_span)!"[span_84](end_span)[span_85](end_span)[span_86](end_span)[span_87](end_span)[span_88](end_span)[span_89](end_span)[span_90](end_span),
+      "Tk: d21ivrinjo@fldubai.com\nMk: Password123[span_91](start_span)[span_92](start_span)[span_93](start_span)[span_94](start_span)[span_95](start_span)[span_96](start_span)[span_97](start_span)!"[span_91](end_span)[span_92](end_span)[span_93](end_span)[span_94](end_span)[span_95](end_span)[span_96](end_span)[span_97](end_span),
+      "Tk: 5cf11e6usc@fldubai.com\nMk: Password123[span_98](start_span)[span_99](start_span)[span_100](start_span)[span_101](start_span)[span_102](start_span)[span_103](start_span)[span_104](start_span)!"[span_98](end_span)[span_99](end_span)[span_100](end_span)[span_101](end_span)[span_102](end_span)[span_103](end_span)[span_104](end_span),
+      "Tk: dde8fdijk8@fldubai.com\nMk: Password123[span_105](start_span)[span_106](start_span)[span_107](start_span)[span_108](start_span)[span_109](start_span)[span_110](start_span)[span_111](start_span)!"[span_105](end_span)[span_106](end_span)[span_107](end_span)[span_108](end_span)[span_109](end_span)[span_110](end_span)[span_111](end_span),
+      "Tk: yc3uif8jd7@fldubai.com\nMk: Password123[span_112](start_span)[span_113](start_span)[span_114](start_span)[span_115](start_span)[span_116](start_span)[span_117](start_span)[span_118](start_span)!"[span_112](end_span)[span_113](end_span)[span_114](end_span)[span_115](end_span)[span_116](end_span)[span_117](end_span)[span_118](end_span),
+      "Tk: mus8x7h2vz@fldubai.com\nMk: Password123[span_119](start_span)[span_120](start_span)[span_121](start_span)[span_122](start_span)[span_123](start_span)[span_124](start_span)[span_125](start_span)!"[span_119](end_span)[span_120](end_span)[span_121](end_span)[span_122](end_span)[span_123](end_span)[span_124](end_span)[span_125](end_span),
+      "Tk: gah4h63vsy@fldubai.com\nMk: Password123[span_126](start_span)[span_127](start_span)[span_128](start_span)[span_129](start_span)[span_130](start_span)[span_131](start_span)[span_132](start_span)!"[span_126](end_span)[span_127](end_span)[span_128](end_span)[span_129](end_span)[span_130](end_span)[span_131](end_span)[span_132](end_span),
+      "Tk: ijlbdoe6p8@fldubai.com\nMk: Password123[span_133](start_span)[span_134](start_span)[span_135](start_span)[span_136](start_span)[span_137](start_span)[span_138](start_span)[span_139](start_span)!"[span_133](end_span)[span_134](end_span)[span_135](end_span)[span_136](end_span)[span_137](end_span)[span_138](end_span)[span_139](end_span),
+      "Tk: ru80jt1nnl@fldubai.com\nMk: Password123[span_140](start_span)[span_141](start_span)[span_142](start_span)[span_143](start_span)[span_144](start_span)[span_145](start_span)[span_146](start_span)!"[span_140](end_span)[span_141](end_span)[span_142](end_span)[span_143](end_span)[span_144](end_span)[span_145](end_span)[span_146](end_span),
+      "Tk: g09vla54du@fldubai.com\nMk: Password123[span_147](start_span)[span_148](start_span)[span_149](start_span)[span_150](start_span)[span_151](start_span)[span_152](start_span)[span_153](start_span)!"[span_147](end_span)[span_148](end_span)[span_149](end_span)[span_150](end_span)[span_151](end_span)[span_152](end_span)[span_153](end_span),
+      "Tk: kl6aco95tf@fldubai.com\nMk: Password123[span_154](start_span)[span_155](start_span)[span_156](start_span)[span_157](start_span)[span_158](start_span)[span_159](start_span)[span_160](start_span)!"[span_154](end_span)[span_155](end_span)[span_156](end_span)[span_157](end_span)[span_158](end_span)[span_159](end_span)[span_160](end_span),
+      "Tk: 9jejyb98zc@fldubai.com\nMk: Password123[span_161](start_span)[span_162](start_span)[span_163](start_span)[span_164](start_span)[span_165](start_span)[span_166](start_span)[span_167](start_span)!"[span_161](end_span)[span_162](end_span)[span_163](end_span)[span_164](end_span)[span_165](end_span)[span_166](end_span)[span_167](end_span),
+      "Tk: 3l2894sw57@fldubai.com\nMk: Password123[span_168](start_span)[span_169](start_span)[span_170](start_span)[span_171](start_span)[span_172](start_span)[span_173](start_span)[span_174](start_span)!"[span_168](end_span)[span_169](end_span)[span_170](end_span)[span_171](end_span)[span_172](end_span)[span_173](end_span)[span_174](end_span),
+      "Tk: a37ln5rgew@fldubai.com\nMk: Password123[span_175](start_span)[span_176](start_span)[span_177](start_span)[span_178](start_span)[span_179](start_span)[span_180](start_span)[span_181](start_span)!"[span_175](end_span)[span_176](end_span)[span_177](end_span)[span_178](end_span)[span_179](end_span)[span_180](end_span)[span_181](end_span),
+      "Tk: l9n4thpg7x@fldubai.com\nMk: Password123[span_182](start_span)[span_183](start_span)[span_184](start_span)[span_185](start_span)[span_186](start_span)[span_187](start_span)[span_188](start_span)!"[span_182](end_span)[span_183](end_span)[span_184](end_span)[span_185](end_span)[span_186](end_span)[span_187](end_span)[span_188](end_span),
+      "Tk: shiairqjdl@fldubai.com\nMk: Password123[span_189](start_span)[span_190](start_span)[span_191](start_span)[span_192](start_span)[span_193](start_span)[span_194](start_span)[span_195](start_span)!"[span_189](end_span)[span_190](end_span)[span_191](end_span)[span_192](end_span)[span_193](end_span)[span_194](end_span)[span_195](end_span),
+      "Tk: 7j1s79hdxb@fldubai.com\nMk: Password123[span_196](start_span)[span_197](start_span)[span_198](start_span)[span_199](start_span)[span_200](start_span)[span_201](start_span)[span_202](start_span)!"[span_196](end_span)[span_197](end_span)[span_198](end_span)[span_199](end_span)[span_200](end_span)[span_201](end_span)[span_202](end_span),
+      "Tk: t4r29xdr3d@fldubai.com\nMk: Password123[span_203](start_span)[span_204](start_span)[span_205](start_span)[span_206](start_span)[span_207](start_span)[span_208](start_span)[span_209](start_span)!"[span_203](end_span)[span_204](end_span)[span_205](end_span)[span_206](end_span)[span_207](end_span)[span_208](end_span)[span_209](end_span),
+      "Tk: khiguu0ut6@fldubai.com\nMk: Password123[span_210](start_span)[span_211](start_span)[span_212](start_span)[span_213](start_span)[span_214](start_span)[span_215](start_span)[span_216](start_span)!"[span_210](end_span)[span_211](end_span)[span_212](end_span)[span_213](end_span)[span_214](end_span)[span_215](end_span)[span_216](end_span),
+      "Tk: 85ipxgi0dw@fldubai.com\nMk: Password123[span_217](start_span)[span_218](start_span)[span_219](start_span)[span_220](start_span)[span_221](start_span)[span_222](start_span)[span_223](start_span)!"[span_217](end_span)[span_218](end_span)[span_219](end_span)[span_220](end_span)[span_221](end_span)[span_222](end_span)[span_223](end_span)
     ];
 
     function getStockList() {
@@ -341,10 +372,10 @@
     }
 
     window.onload = function() {
-      // Cập nhật lại kho nếu là phiên bản mới
-      if (!localStorage.getItem("updated_stock_from_images_v1")) {
+      // Cập nhật lại kho trọn gói 61 tài khoản
+      if (!localStorage.getItem("updated_stock_master_v61")) {
         localStorage.setItem("accounts_stock", JSON.stringify(initialAccounts));
-        localStorage.setItem("updated_stock_from_images_v1", "true");
+        localStorage.setItem("updated_stock_master_v61", "true");
       }
       checkStockStatus();
     };
@@ -496,5 +527,4 @@
     }
   </script>
 </body>
-        </html>
-  
+</html>
