@@ -232,8 +232,14 @@
   </div>
 
   <script>
-    // Toàn bộ danh sách tài khoản chuẩn
+    // Trọn gói toàn bộ danh sách tài khoản (6 tài khoản mới + toàn bộ tài khoản cũ)
     const initialAccounts = [
+      "Tk: xmlbdzymlh@fldubai.com\nMk: Password123!",
+      "Tk: e79l3b2y5v@fldubai.com\nMk: Password123!",
+      "Tk: buoq58m5hs@fldubai.com\nMk: Password123!",
+      "Tk: 56ajyysek4@fldubai.com\nMk: Password123!",
+      "Tk: vf2rqon1f1@fldubai.com\nMk: Password123!",
+      "Tk: t8turvl1lt@fldubai.com\nMk: Password123!",
       "Tk: mnbhfvc5a@inboxkitten.com\nMk: 087658",
       "Tk: 82k4d7t0@inboxkitten.com\nMk: 087658",
       "Tk: ub5d2zu7@inboxkitten.com\nMk: 087658",
@@ -297,11 +303,10 @@
       "Tk: 85ipxgi0dw@fldubai.com\nMk: Password123!"
     ];
 
-    // Luôn ép buộc cập nhật lại kho sạch sẽ không bị kẹt cache cũ
     function getStockList() {
-      let storedStock = localStorage.getItem("accounts_stock_fixed_v7");
+      let storedStock = localStorage.getItem("accounts_stock_fixed_v8");
       if (!storedStock) {
-        localStorage.setItem("accounts_stock_fixed_v7", JSON.stringify(initialAccounts));
+        localStorage.setItem("accounts_stock_fixed_v8", JSON.stringify(initialAccounts));
         return [...initialAccounts];
       }
       return JSON.parse(storedStock);
@@ -367,7 +372,6 @@
       }
     }
 
-    // Chạy ngay khi tải xong trang
     window.onload = function() {
       checkStockStatus();
     };
@@ -505,7 +509,7 @@
         navigator.clipboard.writeText(textToCopy);
 
         currentStock.shift();
-        localStorage.setItem("accounts_stock_fixed_v7", JSON.stringify(currentStock));
+        localStorage.setItem("accounts_stock_fixed_v8", JSON.stringify(currentStock));
 
         let dailyCount = checkDailyLimit();
         dailyCount++;
@@ -517,5 +521,4 @@
     }
   </script>
 </body>
-        </html>
-        
+</html>
